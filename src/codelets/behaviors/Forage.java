@@ -69,7 +69,7 @@ public class Forage extends Codelet {
     public void accessMemoryObjects() {
 
         //Check Jewel after :D
-        knownMO = (MemoryObject) this.getInput("KNOWN_APPLES");
+        //knownMO = (MemoryObject) this.getInput("KNOWN_APPLES");
         knownMO = (MemoryObject) this.getInput("KNOWN_JEWELS");
         
         legsMO = (MemoryObject) this.getOutput("LEGS");

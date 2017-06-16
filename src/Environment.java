@@ -42,7 +42,10 @@ public class Environment {
              World.createJewel(0, 100, 220);
              World.createFood(0, 250, 210);
              c = proxy.createCreature(100,450,0);
+             
              c.start();
+             
+             //c.getLeaflets();
              //c.setRobotID("r0");
              //c.startCamera("r0");
              

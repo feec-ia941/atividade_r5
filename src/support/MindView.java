@@ -111,7 +111,7 @@ public class MindView extends javax.swing.JFrame {
         j++;
         if (j == 14) {
             try {
-              World.createJewel(0,r.nextInt(800) , r.nextInt(600));
+              World.createJewel(r.nextInt(5),r.nextInt(800) , r.nextInt(600));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -156,7 +156,7 @@ public class MindView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
         );
 
         pack();

@@ -20,6 +20,8 @@
 package memory;
 
 import java.awt.Polygon;
+import java.util.List;
+import ws3dproxy.model.Leaflet;
 import ws3dproxy.model.WorldPoint;
 
 /**
@@ -31,6 +33,7 @@ public class CreatureInnerSense {
     public double pitch;
     public double fuel;
     public Polygon FOV;
+    public List<Leaflet> listaLeaflet;
     
     public String toString() {
         if (position != null)
