@@ -17,16 +17,20 @@
  *    Klaus Raizer, Andre Paraense, Ricardo Ribeiro Gudwin
  *****************************************************************************/
 
+import codelets.perception.JewelDetector;
 import br.unicamp.cst.core.entities.Codelet;
 import br.unicamp.cst.core.entities.MemoryObject;
 import br.unicamp.cst.core.entities.Mind;
 import codelets.behaviors.EatClosestApple;
 import codelets.behaviors.Forage;
 import codelets.behaviors.GoToClosestApple;
+import codelets.behaviors.GoToClosestJewel;
+import codelets.behaviors.PutSackClosestJewel;
 import codelets.motor.HandsActionCodelet;
 import codelets.motor.LegsActionCodelet;
 import codelets.perception.AppleDetector;
 import codelets.perception.ClosestAppleDetector;
+import codelets.perception.ClosestJewelDetector;
 import codelets.sensors.InnerSense;
 import codelets.sensors.Vision;
 import java.util.ArrayList;
@@ -43,7 +47,7 @@ import ws3dproxy.model.Thing;
 public class AgentMind extends Mind {
     
     private static int creatureBasicSpeed=3;
-    private static int reachDistance=50;
+    private static int reachDistance=70;
     
     public AgentMind(Environment env) {
                 super();
@@ -54,7 +58,9 @@ public class AgentMind extends Mind {
                 MemoryObject visionMO;
                 MemoryObject innerSenseMO;
                 MemoryObject closestAppleMO;
+                MemoryObject closestJewelMO;
                 MemoryObject knownApplesMO;
+                MemoryObject knownJewelsMO;
                 
                 //Initialize Memory Objects
                 legsMO=createMemoryObject("LEGS", "");
@@ -64,15 +70,27 @@ public class AgentMind extends Mind {
                 CreatureInnerSense cis = new CreatureInnerSense();
 		innerSenseMO=createMemoryObject("INNER", cis);
                 Thing closestApple = null;
+                Thing closestJewel = null;
                 closestAppleMO=createMemoryObject("CLOSEST_APPLE", closestApple);
+                closestJewelMO=createMemoryObject("CLOSEST_JEWEL", closestJewel);
+                
                 List<Thing> knownApples = Collections.synchronizedList(new ArrayList<Thing>());
                 knownApplesMO=createMemoryObject("KNOWN_APPLES", knownApples);
+                
+                List<Thing> knownJewels = Collections.synchronizedList(new ArrayList<Thing>());
+                knownJewelsMO=createMemoryObject("KNOWN_JEWELS", knownJewels);
+                
                 
                 // Create and Populate MindViewer
                 MindView mv = new MindView("MindView");
                 mv.addMO(knownApplesMO);
+                mv.addMO(knownJewelsMO);
+                
                 mv.addMO(visionMO);
+                
                 mv.addMO(closestAppleMO);
+                mv.addMO(closestJewelMO);
+                
                 mv.addMO(innerSenseMO);
                 mv.addMO(handsMO);
                 mv.addMO(legsMO);
@@ -98,16 +116,31 @@ public class AgentMind extends Mind {
                 insertCodelet(hands);
 		
 		// Create Perception Codelets
-                Codelet ad = new AppleDetector();
-                ad.addInput(visionMO);
-                ad.addOutput(knownApplesMO);
-                insertCodelet(ad);
+                Codelet adApple = new AppleDetector();
+                adApple.addInput(visionMO);                
+                adApple.addOutput(knownApplesMO);
+                insertCodelet(adApple);
+                
+                Codelet adJewel = new JewelDetector();
+                adJewel.addInput(visionMO);               
+                adJewel.addOutput(knownJewelsMO);
+                insertCodelet(adJewel);
+                
+                
                 
 		Codelet closestAppleDetector = new ClosestAppleDetector();
 		closestAppleDetector.addInput(knownApplesMO);
 		closestAppleDetector.addInput(innerSenseMO);
 		closestAppleDetector.addOutput(closestAppleMO);
                 insertCodelet(closestAppleDetector);
+                
+                
+                Codelet closestJewelDetector = new ClosestJewelDetector();
+		closestJewelDetector.addInput(knownJewelsMO);
+		closestJewelDetector.addInput(innerSenseMO);
+		closestJewelDetector.addOutput(closestJewelMO);
+                insertCodelet(closestJewelDetector);
+                
 		
 		// Create Behavior Codelets
 		Codelet goToClosestApple = new GoToClosestApple(creatureBasicSpeed,reachDistance);
@@ -115,6 +148,14 @@ public class AgentMind extends Mind {
 		goToClosestApple.addInput(innerSenseMO);
 		goToClosestApple.addOutput(legsMO);
                 insertCodelet(goToClosestApple);
+                
+                
+                // Create Behavior Codelets
+		Codelet goToClosestJewel = new GoToClosestJewel(creatureBasicSpeed,reachDistance);
+		goToClosestJewel.addInput(closestJewelMO);
+		goToClosestJewel.addInput(innerSenseMO);
+		goToClosestJewel.addOutput(legsMO);
+                insertCodelet(goToClosestJewel);
 		
 		Codelet eatApple=new EatClosestApple(reachDistance);
 		eatApple.addInput(closestAppleMO);
@@ -123,10 +164,23 @@ public class AgentMind extends Mind {
                 eatApple.addOutput(knownApplesMO);
                 insertCodelet(eatApple);
                 
-                Codelet forage=new Forage();
-		forage.addInput(knownApplesMO);
-                forage.addOutput(legsMO);
-                insertCodelet(forage);
+                
+                Codelet putSack=new PutSackClosestJewel(reachDistance);
+		putSack.addInput(closestJewelMO);
+		putSack.addInput(innerSenseMO);
+		putSack.addOutput(handsMO);
+                putSack.addOutput(knownJewelsMO);
+                insertCodelet(putSack);
+                
+                Codelet forageApple=new Forage();
+		forageApple.addInput(knownApplesMO);
+                forageApple.addOutput(legsMO);
+                insertCodelet(forageApple);
+                
+                Codelet forageJewel=new Forage();
+		forageJewel.addInput(knownJewelsMO);
+                forageJewel.addOutput(legsMO);
+                insertCodelet(forageJewel);
                 
                 // sets a time step for running the codelets to avoid heating too much your machine
                 for (Codelet c : this.getCodeRack().getAllCodelets())

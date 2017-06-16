@@ -109,7 +109,15 @@ public class MindView extends javax.swing.JFrame {
             }   
         text.setText(alltext);
         j++;
-        if (j == 7) {
+        if (j == 14) {
+            try {
+              World.createJewel(0,r.nextInt(800) , r.nextInt(600));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+        }
+        if (j == 20) {
             try {
               World.createFood(0,r.nextInt(800) , r.nextInt(600));
             } catch (Exception e) {
@@ -117,6 +125,8 @@ public class MindView extends javax.swing.JFrame {
             }
             j = 0;
         }
+        
+        
         //System.out.println("i");
     }
 

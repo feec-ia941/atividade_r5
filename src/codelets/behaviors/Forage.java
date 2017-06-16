@@ -1,4 +1,4 @@
-/*****************************************************************************
+/** ***************************************************************************
  * Copyright 2007-2015 DCA-FEEC-UNICAMP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Contributors:
  *    Klaus Raizer, Andre Paraense, Ricardo Ribeiro Gudwin
- *****************************************************************************/
-
+ **************************************************************************** */
 package codelets.behaviors;
 
 import br.unicamp.cst.core.entities.Codelet;
@@ -26,56 +25,61 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import ws3dproxy.model.Thing;
 
-/** 
- * 
+/**
+ *
  * @author klaus
- * 
- * 
+ *
+ *
  */
-
 public class Forage extends Codelet {
-    
-        private MemoryObject knownMO;
-        private List<Thing> known;
-        private MemoryObject legsMO;
 
+    private MemoryObject knownMO;
+    private List<Thing> known;
+    private MemoryObject legsMO;
 
-	/**
-	 * Default constructor
-	 */
-	public Forage(){       
-	}
+    /**
+     * Default constructor
+     */
+    public Forage() {
+    }
 
-	@Override
-	public void proc() {
-            known = (List<Thing>) knownMO.getI();
-            if (known.size() == 0) {
-		JSONObject message=new JSONObject();
-			try {
-				message.put("ACTION", "FORAGE");
-				legsMO.updateI(message.toString());
-			
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            }            
-		
-	}
+    @Override
+    public void proc() {
 
-	@Override
-	public void accessMemoryObjects() {
-            knownMO = (MemoryObject)this.getInput("KNOWN_APPLES");
-            legsMO=(MemoryObject)this.getOutput("LEGS");
-
-		// TODO Auto-generated method stub
-		
-	}
-        
-        @Override
-        public void calculateActivation() {
+        if (knownMO != null) {
             
+            known = (List<Thing>) knownMO.getI();
+
+            if (known.size() == 0) {
+                JSONObject message = new JSONObject();
+                try {
+                    message.put("ACTION", "FORAGE");
+                    legsMO.updateI(message.toString());
+
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
 
+    }
+
+    @Override
+    public void accessMemoryObjects() {
+
+        //Check Jewel after :D
+        knownMO = (MemoryObject) this.getInput("KNOWN_APPLES");
+        knownMO = (MemoryObject) this.getInput("KNOWN_JEWELS");
+        
+        legsMO = (MemoryObject) this.getOutput("LEGS");
+
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void calculateActivation() {
+
+    }
 
 }
