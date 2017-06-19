@@ -80,7 +80,7 @@ public class GoToClosestApple extends Codelet {
             double distance = pSelf.distance(pApple);
             JSONObject message = new JSONObject();
             try {
-                if (distance > reachDistance && cis.fuel <= 400) { //Go to it
+                if (distance > reachDistance || cis.fuel <= 400) { //Go to it
                     message.put("ACTION", "GOTO");
                     message.put("X", (int) appleX);
                     message.put("Y", (int) appleY);

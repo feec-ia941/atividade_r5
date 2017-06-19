@@ -109,15 +109,15 @@ public class MindView extends javax.swing.JFrame {
             }   
         text.setText(alltext);
         j++;
-        if (j == 14) {
+        if (j % 14 == 0) {
             try {
-              World.createJewel(r.nextInt(5),r.nextInt(800) , r.nextInt(600));
+              World.createJewel(r.nextInt(6),r.nextInt(800) , r.nextInt(600));
             } catch (Exception e) {
                 e.printStackTrace();
             }
             
         }
-        if (j == 20) {
+        if (j == 70) {
             try {
               World.createFood(0,r.nextInt(800) , r.nextInt(600));
             } catch (Exception e) {

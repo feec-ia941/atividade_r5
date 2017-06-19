@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import br.unicamp.cst.core.entities.Codelet;
 import br.unicamp.cst.core.entities.Memory;
 import br.unicamp.cst.core.entities.MemoryObject;
+import java.util.List;
 import java.util.Set;
 import memory.CreatureInnerSense;
 import ws3dproxy.model.Leaflet;
@@ -38,6 +39,8 @@ public class GoToClosestJewel extends Codelet {
     private MemoryObject legsMO;
     private int creatureBasicSpeed;
     private double reachDistance;
+
+    
 
     public GoToClosestJewel(int creatureBasicSpeed, int reachDistance) {
         this.creatureBasicSpeed = creatureBasicSpeed;
@@ -85,49 +88,44 @@ public class GoToClosestJewel extends Codelet {
 
             //Variaveis para verificar preferencia.
             Boolean preference = false;
-            int count = 0 ;
+            int count = 0;
             
             for (Leaflet itemLeaflet : cis.listaLeaflet) {
                 for (String key : itemLeaflet.getItems().keySet()) {
                     Integer[] valor;
                     valor = itemLeaflet.getItems().get(key);
-                    
+
                     //Verifica se joia ainda necessita ser coletada 
-                    if(valor[0]> valor[1]){
-                        System.out.println(count+" - Key: "+key+ " => "+valor[0]+ " || "+valor[1]);
-                        
-                        if (key.equals(closestJewel.getAttributes().getColor())){
-                            System.out.println(count+" - Key: "+key+" (///.°)");
-                            preference= true;
+                    if (valor[0] > valor[1]) {
+                        System.out.println(count + " - Key: " + key + " => " + valor[0] + " || " + valor[1]);
+
+                        if (key.equals(closestJewel.getAttributes().getColor())) {
+                            System.out.println(count + " - Key: " + key + " (///.°)");
+                            preference = true;
                         }
-                    }else
-                        System.out.println(count+" - Key: "+key+" #####");
-                        
-                    
+                    } else {
+                        System.out.println(count + " - Key: " + key + " #####");
+                    }
+
                 }
                 count++;
-                
+
             }
 
             try {
-                if (distance > reachDistance && preference ) { //Go to it
+                if (distance > reachDistance && preference) { //Go to it
                     message.put("ACTION", "GOTO");
                     message.put("X", (int) jewelX);
                     message.put("Y", (int) jewelY);
                     message.put("SPEED", creatureBasicSpeed);
 
-                }
-                else {//Stop
+                } else {//Stop
                     message.put("ACTION", "GOTO");
                     message.put("X", (int) jewelX);
                     message.put("Y", (int) jewelY);
                     message.put("SPEED", 0);
-                    
-                    
-                    
 
-                 
-               }
+                }
                 legsMO.updateI(message.toString());
             } catch (JSONException e) {
                 e.printStackTrace();

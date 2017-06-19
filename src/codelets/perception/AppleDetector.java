@@ -21,9 +21,13 @@ package codelets.perception;
 
 import br.unicamp.cst.core.entities.Codelet;
 import br.unicamp.cst.core.entities.MemoryObject;
+import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import memory.CreatureInnerSense;
+import ws3dproxy.model.Leaflet;
 import ws3dproxy.model.Thing;
 
 /**
@@ -38,15 +42,19 @@ public class AppleDetector extends Codelet {
 
         private MemoryObject visionMO;
         private MemoryObject knownApplesMO;
+        
+        private MemoryObject selfInfoMO;
+        private int reachDistance;
 
-	public AppleDetector(){
-		
+	public AppleDetector(int reachDistance){
+		this.reachDistance=reachDistance;
 	}
 
 	@Override
 	public void accessMemoryObjects() {
                 synchronized(this) {
 		    this.visionMO=(MemoryObject)this.getInput("VISION");
+                    this.selfInfoMO = (MemoryObject) this.getInput("INNER");
                 }
 		this.knownApplesMO=(MemoryObject)this.getOutput("KNOWN_APPLES");
 	}
@@ -70,9 +78,30 @@ public class AppleDetector extends Codelet {
                             found = true;
                             break;
                           }
-                       if (found == false && t.getName().contains("PFood") && !t.getName().contains("NPFood")) known.add(t);
-                    }
-               
+                       if (found == false && t.getName().contains("PFood") && !t.getName().contains("NPFood")){
+                           CreatureInnerSense cis = (CreatureInnerSense) selfInfoMO.getI();
+                            
+                        double selfX=cis.position.getX();
+			double selfY=cis.position.getY();
+                        
+                        double appleX=t.getX1();
+			double appleY=t.getY1();
+
+			Point2D pApple = new Point();
+			pApple.setLocation(appleX, appleY);
+
+			Point2D pSelf = new Point();
+			pSelf.setLocation(selfX, selfY);
+
+			double distance = pSelf.distance(pApple);
+                           
+                           
+                           if(cis.fuel <= 4000 ||distance <=reachDistance )                          
+                                known.add(t);
+                            
+                       }
+                           
+                    }               
                  }
                }
             }
