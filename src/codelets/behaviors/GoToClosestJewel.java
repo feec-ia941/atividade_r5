@@ -113,7 +113,7 @@ public class GoToClosestJewel extends Codelet {
             }
 
             try {
-                if (distance > reachDistance && preference) { //Go to it
+                if (distance <= (reachDistance +50) || preference) { //Go to it
                     message.put("ACTION", "GOTO");
                     message.put("X", (int) jewelX);
                     message.put("Y", (int) jewelY);

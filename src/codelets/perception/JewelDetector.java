@@ -103,9 +103,11 @@ public class JewelDetector extends Codelet {
                                     double distance = pSelf.distance(pJewel);
 
                                     //Verifica se joia ainda necessita ser coletada 
-                                    if (valor[0] > valor[1] || distance <= reachDistance ) {
+                                    if (valor[0] > valor[1]) {
                                         if (key.equals(t.getAttributes().getColor())) {
 
+                                            preference = true;
+                                        } else if (distance <= reachDistance + 50) {
                                             preference = true;
                                         }
                                     }

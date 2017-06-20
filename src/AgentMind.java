@@ -48,7 +48,7 @@ import ws3dproxy.model.Thing;
 public class AgentMind extends Mind {
 
     private static int creatureBasicSpeed = 2;
-    private static int reachDistance = 70;
+    private static int reachDistance = 100;
 
     public AgentMind(Environment env) {
         super();
@@ -128,7 +128,7 @@ public class AgentMind extends Mind {
         adJewel.addOutput(knownJewelsMO);
         insertCodelet(adJewel);
 
-        Codelet closestAppleDetector = new ClosestAppleDetector();
+        Codelet closestAppleDetector = new ClosestAppleDetector(reachDistance);
         closestAppleDetector.addInput(knownApplesMO);
         closestAppleDetector.addInput(innerSenseMO);
         closestAppleDetector.addOutput(closestAppleMO);
