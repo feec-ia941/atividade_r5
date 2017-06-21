@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="GRAFO">
-            <file>file:/home/alciomar/Downloads/Mestrado/CST/WS3DApp/src/codelets/behaviors/GoToClosestJewel.java</file>
             <file>file:/home/alciomar/Downloads/Mestrado/CST/WS3DApp/src/support/MindView.java</file>
             <file>file:/home/alciomar/Downloads/Mestrado/CST/WS3DApp/src/AgentMind.java</file>
             <file>file:/home/alciomar/Downloads/Mestrado/CST/WS3DApp/src/codelets/perception/JewelDetector.java</file>
-            <file>file:/home/alciomar/Downloads/Mestrado/CST/WS3DApp/src/codelets/perception/ClosestJewelDetector.java</file>
         </group>
     </open-files>
 </project-private>
