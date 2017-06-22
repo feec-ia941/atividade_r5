@@ -149,8 +149,8 @@ public class MindView extends javax.swing.JFrame {
 
                 double distance = pSelf.distance(pJewel);
 
-                if(distance > 50)
-                    World.createJewel(r.nextInt(6), jewelX, jewelY);
+               // if(distance > 50)
+                  //  World.createJewel(r.nextInt(6), jewelX, jewelY);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -159,7 +159,7 @@ public class MindView extends javax.swing.JFrame {
         }
         if (j == 70) {
             try {
-                World.createFood(0, r.nextInt(800), r.nextInt(600));
+              //  World.createFood(0, r.nextInt(800), r.nextInt(600));
             } catch (Exception e) {
                 e.printStackTrace();
             }
