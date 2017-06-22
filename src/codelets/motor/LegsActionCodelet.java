@@ -49,11 +49,12 @@ public class LegsActionCodelet extends Codelet {
     static Logger log = Logger.getLogger(LegsActionCodelet.class.getCanonicalName());
 
     private ArrayList<Node> path;
-    private int check = 0;
 
     public LegsActionCodelet(Creature nc) {
         c = nc;
         this.path = new A_StarAlgorithm().main();
+
+        System.out.println("path.size(): " + path.size());
     }
 
     @Override
@@ -84,15 +85,25 @@ public class LegsActionCodelet extends Codelet {
                         }
                         try {
                             //c.rotate(2);
-                           // c.moveto(0.5, 170 , 190); //x1 e y1
+                            // c.moveto(0.5, 170 , 190); //x1 e y1
+
+                            Node node = null;
+                            if (path.size() > 0) 
+                                node = path.get(path.size() - 1);
                             
-                            Node node = path.get(check);
-                            
-                            if(c.getPosition().getX() == node.getX())
-                                check++;
-                            
-                            node = path.get(check);                                                                                    
-                            c.moveto(0.5, node.getX(), node.getY() );
+
+                            System.out.println("Node  X: " + node.getX() + " Y:" + node.getY());
+
+                            int xCreature = (int) c.getPosition().getX();
+                            int yCreature = (int) c.getPosition().getY();
+
+                            System.out.println("CREA  X: " + xCreature + " Y:" + yCreature);
+
+                            if (((node.getX() - xCreature) <= 50 || (node.getY() - yCreature) <= 50)) {
+                                path.remove(path.size() - 1);
+                            }
+
+                            c.moveto(1, node.getX(), node.getY());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

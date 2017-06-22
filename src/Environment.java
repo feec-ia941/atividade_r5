@@ -42,13 +42,15 @@ public class Environment {
           //   World.createJewel(0, 100, 220);
           //   World.createFood(0, 250, 210);
           
-           //  World.createBrick(1,198,190,224,459);
+            
+          
+              World.createBrick(1,135,164,624,479);
              
             // World.createBrick(1,298,156,351,455);
              
              c = proxy.createCreature(100,450,0);
              
-             ;
+             
              
              c.start();
              
