@@ -64,6 +64,7 @@ public class MindView extends javax.swing.JFrame {
     List<MemoryObject> mol = new ArrayList<>();
     int j = 0;
     Random r = new Random();
+    Boolean Alt = true;
 
     CreatureInnerSense creature = null;
 
@@ -130,16 +131,35 @@ public class MindView extends javax.swing.JFrame {
         text.setText(alltext);
         j++;
 
+        //Are A
+        int _AmaxX = 150;
+        int _AminX = 18;
+        int _AmaxY = 470;
+        int _AminY = 395;
+
+        //Area B
+        int _BmaxX = 640;
+        int _BminX = 469;
+        int _BmaxY = 195;
+        int _BminY = 11;
+
         if (j % 14 == 0) {
             try {
-                
 
                 double selfX = creature.position.getX();
                 double selfY = creature.position.getY();
-               
 
-                double jewelX = r.nextInt(800);
-                double jewelY = r.nextInt(600);
+                double jewelX;
+                double jewelY;
+                if (Alt) {
+                    jewelX = r.nextInt((_AmaxX - _AminX) + 1) + _AminX;
+                    jewelY = r.nextInt((_AmaxY - _AminY) + 1) + _AminY;
+                    Alt = false;
+                } else {
+                    jewelX = r.nextInt((_BmaxX - _BminX) + 1) + _BminX;
+                    jewelY = r.nextInt((_BmaxY - _BminY) + 1) + _BminY;
+                    Alt = true;
+                }
 
                 Point2D pJewel = new Point();
                 pJewel.setLocation(jewelX, jewelY);
@@ -149,8 +169,9 @@ public class MindView extends javax.swing.JFrame {
 
                 double distance = pSelf.distance(pJewel);
 
-               // if(distance > 50)
-                  //  World.createJewel(r.nextInt(6), jewelX, jewelY);
+                if (distance > 50) {
+                    World.createJewel(r.nextInt(6), jewelX, jewelY);
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -159,7 +180,35 @@ public class MindView extends javax.swing.JFrame {
         }
         if (j == 70) {
             try {
-              //  World.createFood(0, r.nextInt(800), r.nextInt(600));
+
+                double selfX = creature.position.getX();
+                double selfY = creature.position.getY();
+                
+                double appleX;
+                double appleY;
+                if (Alt) {
+                    appleX = r.nextInt((_AmaxX - _AminX) + 1) + _AminX;
+                    appleY = r.nextInt((_AmaxY - _AminY) + 1) + _AminY;
+                    Alt = false;
+                } else {
+                    appleX = r.nextInt((_BmaxX - _BminX) + 1) + _BminX;
+                    appleY = r.nextInt((_BmaxY - _BminY) + 1) + _BminY;
+                    Alt = true;
+                }
+
+                Point2D pApple = new Point();
+                pApple.setLocation(appleX, appleY);
+
+                Point2D pSelf = new Point();
+                pSelf.setLocation(selfX, selfY);
+
+                double distance = pSelf.distance(pApple);
+
+                if (distance > 50) {
+                    World.createFood(0, appleX, appleY);
+                }
+
+                // World.createFood(0, r.nextInt(800), r.nextInt(600));
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -44,11 +44,18 @@ public class Environment {
           
             
           
-              World.createBrick(1,135,164,624,479);
+              //World.createBrick(1,154,160,624,400);
+              World.createBrick(1,174,126,210,276);
+              World.createBrick(1,252,483,284,588);
+              World.createBrick(1,375,282,412,385);
              
-            // World.createBrick(1,298,156,351,455);
+              World.createBrick(1,532,413,569,513);
+              World.createBrick(1,686,266,721,349);
+              
              
-             c = proxy.createCreature(100,450,0);
+            
+             
+             c = proxy.createCreature(50,550,0);
              
              
              

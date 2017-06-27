@@ -88,7 +88,10 @@ public class GoToClosestJewel extends Codelet {
 
             //Variaveis para verificar preferencia.
             Boolean preference = false;
-            int count = 0;
+            
+            int count = 0 ;
+            int countAll = 0;
+            int countPreference = 0;
             
             for (Leaflet itemLeaflet : cis.listaLeaflet) {
                 for (String key : itemLeaflet.getItems().keySet()) {
@@ -105,10 +108,18 @@ public class GoToClosestJewel extends Codelet {
                         }
                     } else {
                         System.out.println(count + " - Key: " + key + " #####");
+                        countPreference++;
                     }
+                    
+                    countAll++;
 
                 }
-                count++;
+                
+                if(countAll==countPreference)
+                    System.out.println("$$$$$$$$$ Creature Win $$$$$$$$$");
+                    
+                    
+                
 
             }
 
@@ -120,10 +131,12 @@ public class GoToClosestJewel extends Codelet {
                     message.put("SPEED", creatureBasicSpeed);
 
                 } else {//Stop
-                    message.put("ACTION", "GOTO");
-                    message.put("X", (int) jewelX);
-                    message.put("Y", (int) jewelY);
-                    message.put("SPEED", 0);
+//                    message.put("ACTION", "GOTO");
+//                    message.put("X", (int) jewelX);
+//                    message.put("Y", (int) jewelY);
+//                    message.put("SPEED", 0);
+
+                    message.put("ACTION", "FORAGE");
 
                 }
                 legsMO.updateI(message.toString());

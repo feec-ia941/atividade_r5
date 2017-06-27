@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="GRAFO">
+            <file>file:/home/alciomar/Downloads/Mestrado/CST/WS3DApp/src/codelets/behaviors/KnowsWallCloesestBrick.java</file>
             <file>file:/home/alciomar/Downloads/Mestrado/CST/WS3DApp/src/PathFinding/InputHandler.java</file>
-            <file>file:/home/alciomar/Downloads/Mestrado/CST/WS3DApp/src/PathFinding/A_StarAlgorithm.java</file>
+            <file>file:/home/alciomar/Downloads/Mestrado/CST/WS3DApp/src/codelets/perception/ClosestBrickDetector.java</file>
+            <file>file:/home/alciomar/Downloads/Mestrado/CST/WS3DApp/src/codelets/motor/LegsActionCodelet.java</file>
         </group>
     </open-files>
 </project-private>

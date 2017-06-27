@@ -1,0 +1,49 @@
+* [33mcommit 59d29595a4b1ca7d409a03a1a6af979b0119b79c[m
+[31m|[m Author: Alciomar Hollanda <alciomarhollanda@gmail.com>
+[31m|[m Date:   Thu Jun 22 18:09:58 2017 -0300
+[31m|[m 
+[31m|[m     Desviando da parede com uma boa velocidade, falta captar de acordo com o que a creatura ve
+[31m|[m  
+* [33mcommit ac843a2764c518bfd6a2b92eb210809ee2878f29[m
+[31m|[m Author: Alciomar Hollanda <alciomarhollanda@gmail.com>
+[31m|[m Date:   Thu Jun 22 00:10:37 2017 -0300
+[31m|[m 
+[31m|[m     foi adaptado a pathingFind para o cst, falta criar a logica para enxergar e bloquear as paredes =}
+[31m|[m  
+* [33mcommit 6374e47e3c0b609a1673d2abc768d7e0a624df97[m
+[31m|[m Author: Alciomar Hollanda <alciomarhollanda@gmail.com>
+[31m|[m Date:   Tue Jun 20 22:54:34 2017 -0300
+[31m|[m 
+[31m|[m     Criando apenas um merge
+[31m|[m  
+* [33mcommit 28ce00af033a875b3bc5994da129bfe36733c06f[m
+[31m|[m Author: Alciomar Hollanda <alciomarhollanda@gmail.com>
+[31m|[m Date:   Tue Jun 20 18:10:44 2017 -0300
+[31m|[m 
+[31m|[m     alterações feitas para que a criatura pudesse pegar joias que estão próximas quanto alimentos. Outra alterações foi na criação de joias que não gera se estiver próxima da criatura, para não travar o percurso
+[31m|[m  
+* [33mcommit 71eb6c495d182f89e3f67b39ba4e9b5ab489625c[m
+[31m|[m Author: Alciomar Hollanda <alciomarhollanda@gmail.com>
+[31m|[m Date:   Sun Jun 18 23:56:37 2017 -0300
+[31m|[m 
+[31m|[m     Creature seguindo joias e comendo alimentos, fatal aperfeiçoar para pegar alimentos ou joias que estão próximos.
+[31m|[m  
+* [33mcommit 3825002537adeccd5db78ab21974400d60940b56[m
+[31m|[m Author: Alciomar Hollanda <alciomarhollanda@gmail.com>
+[31m|[m Date:   Fri Jun 16 16:36:06 2017 -0300
+[31m|[m 
+[31m|[m     Algumas alterações feitas mas apresentando alguns Bugs
+[31m|[m     
+[31m|[m     Acredito que seja a parte da memori, preciso fazer algumas validações para que funcione corretamente. #FelizSbado
+[31m|[m  
+* [33mcommit ce9ecc78e8f40235e66e83ed99cce16411f1645e[m
+[31m|[m Author: Alciomar Hollanda <alciomarhollanda@gmail.com>
+[31m|[m Date:   Fri Jun 16 14:18:28 2017 -0300
+[31m|[m 
+[31m|[m     Creature pega joias e alimentos
+[31m|[m  
+* [33mcommit 76277dad19e018561054fd22f04e9e5ec833f5c5[m
+  Author: Alciomar Hollanda <alciomarhollanda@gmail.com>
+  Date:   Fri Jun 16 14:15:51 2017 -0300
+  
+      Versão do professor

@@ -23,12 +23,16 @@ import org.json.JSONObject;
 
 import br.unicamp.cst.core.entities.Codelet;
 import br.unicamp.cst.core.entities.MemoryObject;
+import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.logging.Logger;
 import org.json.JSONException;
 import ws3dproxy.model.Creature;
+import ws3dproxy.model.Thing;
 
 /**
  * Legs Action Codelet monitors working storage for instructions and acts on the
@@ -49,10 +53,12 @@ public class LegsActionCodelet extends Codelet {
     static Logger log = Logger.getLogger(LegsActionCodelet.class.getCanonicalName());
 
     private ArrayList<Node> path;
+    private ArrayList<Thing> brickKnows;
+    private boolean way = true;
 
     public LegsActionCodelet(Creature nc) {
         c = nc;
-        this.path = new A_StarAlgorithm().main();
+        this.path = new A_StarAlgorithm().main(c);
 
         System.out.println("path.size(): " + path.size());
     }
@@ -84,29 +90,49 @@ public class LegsActionCodelet extends Codelet {
                             log.info("Sending Forage command to agent");
                         }
                         try {
-                            //c.rotate(2);
-                            // c.moveto(0.5, 170 , 190); //x1 e y1
-
+                            //c.rotate(2);                            
                             Node node = null;
-                            if (path.size() > 0) 
-                                node = path.get(path.size() - 1);
-                            
-
-                            System.out.println("Node  X: " + node.getX() + " Y:" + node.getY());
 
                             int xCreature = (int) c.getPosition().getX();
                             int yCreature = (int) c.getPosition().getY();
 
-                            System.out.println("CREA  X: " + xCreature + " Y:" + yCreature);
+                                                    
+                            double menor = Integer.MAX_VALUE;
+                            
+                            
 
-                            if (((node.getX() - xCreature) <= 50 || (node.getY() - yCreature) <= 50)) {
-                                path.remove(path.size() - 1);
+                            outerloop:
+                            for (int i = 0; i < path.size(); i++) {
+
+                                
+
+                                Point2D pointGo = new Point();
+                                pointGo.setLocation(path.get(i).getX(), path.get(i).getY());
+
+                                Point2D pSelf = new Point();
+                                pSelf.setLocation(xCreature, yCreature);
+
+                                double distance = pSelf.distance(pointGo);
+                                
+                                if(distance < menor)
+                                    menor = distance;
+
+                                if (distance < 100 && distance > 10) {
+                                    node = path.get(i);
+                                    if (path.get(0).equals(path.get(i))) {
+                                        Collections.reverse(path);
+                                    }
+                                    c.moveto(1, node.getX(), node.getY());
+                                    break outerloop;
+                                }
+
                             }
 
-                            c.moveto(1, node.getX(), node.getY());
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+
                     } else if (action.equals("GOTO")) {
                         if (!comm.equals(previousLegsAction)) {
                             double speed = command.getDouble("SPEED");
